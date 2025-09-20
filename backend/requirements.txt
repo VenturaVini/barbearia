@@ -3,4 +3,4 @@ djangorestframework>=3.14
 djangorestframework-simplejwt>=5.2
 django-cors-headers>=4.0
 whitenoise>=6.5
-django-mssql-backend>=2.8
+mssql-django>=1.3

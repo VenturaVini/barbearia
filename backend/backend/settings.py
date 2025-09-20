@@ -58,7 +58,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql.backend',
+        'ENGINE': 'mssql',
         'NAME': os.getenv('DB_NAME', 'barbearia_db'),
         'USER': os.getenv('DB_USER', 'sa'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'Your_password123!'),
