@@ -3,7 +3,9 @@
     "allow": [
       "Bash(docker-compose:*)",
       "Bash(docker cp:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(docker logs:*)",
+      "Bash(docker compose logs:*)"
     ],
     "deny": [],
     "ask": []
