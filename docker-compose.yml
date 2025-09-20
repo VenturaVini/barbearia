@@ -1,4 +1,15 @@
 services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${MSSQL_SA_PASSWORD}
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
   backend:
     build: ./backend
     ports:
@@ -6,17 +17,29 @@ services:
     environment:
       - DEBUG=${DEBUG}
       - SECRET_KEY=${SECRET_KEY}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${MSSQL_SA_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/app
+    depends_on:
+      - db
 
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
     environment:
-      - REACT_APP_API_URL=http://localhost:8000/api
+      - REACT_APP_API_URL=http://34.30.5.249:8000/api
     volumes:
       - ./frontend:/app
       - /app/node_modules
     command: npm start
+    depends_on:
+      - backend
+
+volumes:
+  sqlserver_data:
