@@ -12,20 +12,21 @@ def create_database():
         try:
             # Connect to master database first
             conn_str = (
-                f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+                f"DRIVER={{ODBC Driver 18 for SQL Server}};"
                 f"SERVER={os.getenv('DB_HOST', 'db')};"
                 f"UID={os.getenv('DB_USER', 'sa')};"
-                f"PWD={os.getenv('DB_PASSWORD')}"
+                f"PWD={os.getenv('DB_PASSWORD')};"
+                f"TrustServerCertificate=yes;"
             )
 
             print(f"Attempting to connect to SQL Server (attempt {retry_count + 1}/{max_retries})...")
             conn = pyodbc.connect(conn_str)
+            conn.autocommit = True
             cursor = conn.cursor()
 
             # Create database if it doesn't exist
             db_name = os.getenv('DB_NAME', 'barbearia_db')
             cursor.execute(f"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = '{db_name}') CREATE DATABASE {db_name}")
-            conn.commit()
 
             print(f"Database '{db_name}' created/verified successfully")
             cursor.close()
