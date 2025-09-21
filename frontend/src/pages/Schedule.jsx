@@ -251,11 +251,6 @@ function Schedule() {
                         )}
                       </div>
 
-                      {/* Debug: Mostrar valores para verificar */}
-                      <div style={{ fontSize: '10px', color: 'yellow', marginTop: '5px' }}>
-                        Debug: pode_cancelar={String(agendamento.pode_cancelar)}, status={agendamento.status}
-                      </div>
-
                       {agendamento.pode_cancelar && agendamento.status !== 'CANCELADO' && (
                         <button
                           onClick={() => {
