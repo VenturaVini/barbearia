@@ -109,7 +109,7 @@ function Schedule() {
       <header className="header">
         <div className="container">
           <nav className="nav">
-            <div className="logo">Barbearia</div>
+            <div className="logo">Barbearia LasVentura</div>
             <ul className="nav-links">
               <li>
                 <button onClick={handleLogout} className="btn btn-secondary">
